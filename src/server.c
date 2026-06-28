@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "network.h"
-
+#include "io_utils.h"
 
 
 
@@ -20,14 +20,26 @@ int main(int argc, char* argv[]){
         perror("Failed to listen to port");
         exit(1);
     }
-
+    char clientbuf[MAX_HTTP_REQUEST_SIZE];
     while(1){
 
-        int accept_status = accept_connection(listen_fd);
+        int connfd = accept_connection(listen_fd);
         
-        if(accept_status<0){
+        if(connfd<0){
             exit(1);
         }
+        // memset the client buf to prevent garbage values
+        memset(clientbuf,0,sizeof(clientbuf));
+
+        read_http_headers(connfd,clientbuf,MAX_HTTP_REQUEST_SIZE);
+        printf("%s",clientbuf);
+        fflush(stdout);
+
+
+
+        
+
+
 
 
 
