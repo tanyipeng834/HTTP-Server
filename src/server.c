@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include "network.h"
-#include "io_utils.h"
 
-
+#include "server.h"
 
 int main(int argc, char* argv[]){
 
@@ -31,9 +28,36 @@ int main(int argc, char* argv[]){
         // memset the client buf to prevent garbage values
         memset(clientbuf,0,sizeof(clientbuf));
 
-        read_http_headers(connfd,clientbuf,MAX_HTTP_REQUEST_SIZE);
-        printf("%s",clientbuf);
-        fflush(stdout);
+        if(read_http_headers(connfd,clientbuf,MAX_HTTP_REQUEST_SIZE)>0)
+        {
+            
+            
+
+            
+         
+
+            
+
+
+                http_request * request = parse_http_request(clientbuf);
+
+                printf("method: %s\n",request->method);
+                printf("version: %s\n",request->version);
+                printf("uri: %s\n",request->uri);
+
+
+
+
+
+
+                
+
+
+
+            }
+        }
+        
+
 
 
 
@@ -49,4 +73,4 @@ int main(int argc, char* argv[]){
 
 
 
-}
+

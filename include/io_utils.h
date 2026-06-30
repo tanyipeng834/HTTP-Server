@@ -3,14 +3,28 @@
 #define IO_UTILS
 
 #include <stddef.h>
-#include <sys/types.h>
+#include <stdio.h>
 #include <errno.h>
 #include <unistd.h>   
 #include <string.h>
 #define MAX_HTTP_REQUEST_SIZE 8192
 
 
-ssize_t read_http_headers(int fd, char* userbuf,size_t cap );
+
+
+
+
+
+char * trim_left(char* http_string);
+
+
+void split_string(char * input_string, char ** input_buffer, char delimiter);
+
+
+
+
+
+
 
 
 
